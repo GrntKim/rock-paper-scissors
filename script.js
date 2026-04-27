@@ -15,32 +15,13 @@ function playRound(round, humanChoice, computerChoice) {
     if(h === c) {
         console.log('Round ' + round + ': It\'s a draw! Both chose ' + humanChoice);
         return;
+    } else if((h === 'rock' && c === 'scissors') || (h === 'scissors' && c === 'paper') || (h === 'paper' && c === 'rock')) {
+            humanScore++;
+            console.log('Round ' + round + ': You win! ' + humanChoice + ' beats ' + computerChoice);
+    } else {
+            computerScore++;
+            console.log('Round ' + round + ': You lose! ' + computerChoice + ' beats ' + humanChoice)
     }
-    var lost = false;
-    if(h === 'rock') {
-        if(c === 'scissors') {
-            humanScore++;
-        } else {
-            computerScore++;
-            lost = true;
-        }
-    } else if(h === 'scissors') {
-        if(c === 'paper') {
-            humanScore++;
-        } else {
-            computerScore++;
-            lost = true;
-        }
-    } else if(h === 'paper') {
-        if(c === 'rock') {
-            humanScore++;
-        } else {
-            computerScore++;
-            lost = true;
-        }
-    }
-    if (lost) console.log('Round ' + round + ': You lose! ' + computerChoice + ' beats ' + humanChoice)
-    else console.log('Round ' + round + ': You win! ' + humanChoice + ' beats ' + computerChoice);
 }
 
 
