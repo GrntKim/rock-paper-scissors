@@ -1,19 +1,19 @@
-const choices = ['Rock', 'Paper', 'Scissors'];
+const choices = ['rock', 'paper', 'scissors'];
 
 function getComputerChoice() {
     return choices[Math.floor(Math.random()*choices.length)];
 }
 
 function getHumanChoice() {
-    var humanChoice = prompt('Make your choice');
+    var humanChoice = prompt('Make your choice [Rock, Paper, Scissors]');
     return humanChoice;
 }
 
-function playRound(humanChoice, computerChoice) {
+function playRound(round, humanChoice, computerChoice) {
     var h = humanChoice.toLowerCase();
     var c = computerChoice.toLowerCase();
     if(h === c) {
-        console.log('Draw! ' + humanChoice + ' and ' + computerChoice);
+        console.log('Round ' + round + ': It\'s a draw! Both chose ' + humanChoice);
         return;
     }
     var lost = false;
@@ -39,8 +39,8 @@ function playRound(humanChoice, computerChoice) {
             lost = true;
         }
     }
-    if (lost) console.log('You lose! ' + computerChoice + ' beats ' + humanChoice)
-    else console.log('You Win! ' + humanChoice + ' beats ' + computerChoice);
+    if (lost) console.log('Round ' + round + ': You lose! ' + computerChoice + ' beats ' + humanChoice)
+    else console.log('Round ' + round + ': You win! ' + humanChoice + ' beats ' + computerChoice);
 }
 
 
@@ -49,16 +49,18 @@ var computerScore = 0;
 const rounds = 5;
 
 function playGame() {
-    for (var i=0; i<rounds; i++)
-        playRound(getHumanChoice(), getComputerChoice());
+    for (var i=1; i<=rounds; i++)
+        playRound(i, getHumanChoice(), getComputerChoice());
 
+    console.log('--------------------');
     if(humanScore > computerScore) 
-        console.log('You Win!');
-    if(humanScore === computerScore)
-        console.log('Draw!');
+        console.log('You win!');
+    else if(humanScore === computerScore)
+        console.log('It\'s a draw!');
     else 
         console.log('You lose...');
-    console.log('you: ' + humanScore + ', computer: ' + computerScore);
+    console.log('You: ' + humanScore + ', Computer: ' + computerScore);
+    console.log('--------------------');
 
 }
 
