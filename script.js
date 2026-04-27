@@ -1,6 +1,12 @@
+const choices = ['rock', 'paper', 'scissors'];
+
 function getComputerChoice() {
-    choices = ['rock', 'paper', 'scissors'];
     return choices[Math.floor(Math.random()*choices.length)];
 }
 
-console.log(getComputerChoice());
+function getHumanChoice() {
+    var humanChoice = prompt('Make your choice').toLowerCase();
+    return humanChoice;
+}
+
+console.log(getHumanChoice());
