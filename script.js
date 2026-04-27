@@ -9,9 +9,6 @@ function getHumanChoice() {
     return humanChoice;
 }
 
-var humanScore = 0;
-var computerScore = 0;
-
 function playRound(humanChoice, computerChoice) {
     var h = humanChoice.toLowerCase();
     var c = computerChoice.toLowerCase();
@@ -46,7 +43,23 @@ function playRound(humanChoice, computerChoice) {
     else console.log('You Win! ' + humanChoice + ' beats ' + computerChoice);
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
-playRound(humanSelection, computerSelection);
+var humanScore = 0;
+var computerScore = 0;
+const rounds = 5;
+
+function playGame() {
+    for (var i=0; i<rounds; i++)
+        playRound(getHumanChoice(), getComputerChoice());
+
+    if(humanScore > computerScore) 
+        console.log('You Win!');
+    if(humanScore === computerScore)
+        console.log('Draw!');
+    else 
+        console.log('You lose...');
+    console.log('you: ' + humanScore + ', computer: ' + computerScore);
+
+}
+
+playGame();
