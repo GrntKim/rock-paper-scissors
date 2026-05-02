@@ -1,37 +1,51 @@
-const choices = ['rock', 'paper', 'scissors'];
+const choices = ['Rock', 'Paper', 'Scissors'];
 
 function getComputerChoice() {
     return choices[Math.floor(Math.random()*choices.length)];
 }
 
-function getHumanChoice() {
-    var humanChoice = prompt('Make your choice [Rock, Paper, Scissors]');
-    return humanChoice;
-}
+let round = 1;
+document.querySelectorAll('button').forEach((button) => {
+    button.addEventListener('click', () => {
+        let humanChoice;
+        if (button.classList.contains('rock-btn')) {
+            humanChoice = 'Rock';
+        } else if (button.classList.contains('paper-btn')) {
+            humanChoice = 'Paper';
+        } else {
+            humanChoice = 'Scissors';
+        }
+        playRound(round++, humanChoice, getComputerChoice());
+    });
+});
+
+let humanScore = 0;
+let computerScore = 0;
 
 function playRound(round, humanChoice, computerChoice) {
-    var h = humanChoice.toLowerCase();
-    var c = computerChoice.toLowerCase();
+    const hs = document.querySelector('.human-score');
+    const cs = document.querySelector('.computer-score');
+
+    const hc = document.querySelector('.human-choice');
+    const cc = document.querySelector('.computer-choice');
+
+    document.querySelector('.round').textContent = round;
+    hc.textContent = humanChoice;
+    cc.textContent = computerChoice;
+
+    let h = humanChoice;
+    let c = computerChoice;
     if(h === c) {
-        console.log('Round ' + round + ': It\'s a draw! Both chose ' + humanChoice);
         return;
-    } else if((h === 'rock' && c === 'scissors') || (h === 'scissors' && c === 'paper') || (h === 'paper' && c === 'rock')) {
-            humanScore++;
-            console.log('Round ' + round + ': You win! ' + humanChoice + ' beats ' + computerChoice);
+    } else if((h === 'Rock' && c === 'Scissors') || (h === 'Scissors' && c === 'Paper') || (h === 'Paper' && c === 'Rock')) {
+            hs.textContent = ++humanScore;
     } else {
-            computerScore++;
-            console.log('Round ' + round + ': You lose! ' + computerChoice + ' beats ' + humanChoice)
+            cs.textContent = ++computerScore;
     }
 }
 
 
-var humanScore = 0;
-var computerScore = 0;
-const rounds = 5;
-
 function playGame() {
-    for (var i=1; i<=rounds; i++)
-        playRound(i, getHumanChoice(), getComputerChoice());
 
     console.log('--------------------');
     if(humanScore > computerScore) 
@@ -44,5 +58,3 @@ function playGame() {
     console.log('--------------------');
 
 }
-
-playGame();
